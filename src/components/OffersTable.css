@@ -1,0 +1,49 @@
+/* Таблица предложений. Строки — CSS Grid: колонки «Цена» и «Остаток» имеют заданную ширину,
+   поэтому не «ездят» от бренда к бренду, а «Название» занимает остаток.
+   Классы .table и .table-hover — от Bootstrap (границы, подсветка строки при наведении). */
+.offers-table {
+  table-layout: fixed;
+}
+
+.offers-table tr {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 9rem 8rem;
+}
+
+/* Числа прижаты вправо и стоят по центру высоты строки. Ячейки тянутся на всю высоту строки,
+   поэтому подсветка при наведении заливает строку целиком */
+.offers-table td.offers-price,
+.offers-table td.offers-stock {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* Телефон: название на всю ширину, под ним в одну строку цена и остаток.
+   Шапка скрыта, вместо неё — подписи в самих ячейках (data-label) */
+@media (max-width: 575.98px) {
+  .offers-table thead {
+    display: none;
+  }
+
+  .offers-table tbody tr {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .offers-table td.offers-name {
+    grid-column: 1 / -1;
+    padding-bottom: 0;
+    border-bottom-width: 0;
+  }
+
+  .offers-table td.offers-price {
+    justify-content: flex-start;
+  }
+
+  .offers-table td[data-label]::before {
+    content: attr(data-label) ':';
+    margin-right: 0.35em;
+    font-size: 0.875em;
+    color: var(--bs-secondary-color);
+  }
+}
