@@ -22,7 +22,7 @@ export default function SearchForm() {
       <div className="input-group">
         <input
           id="part-number"
-          className="form-control"
+          className="form-control shadow-none"
           placeholder="Например, 0189 или OC90"
           value={value}
           onChange={(e) => setValue(e.target.value)}
